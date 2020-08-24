@@ -1,0 +1,114 @@
+// client-side js
+// run by the browser each time your view template is loaded
+
+console.log("hello world :o");
+
+// our default array of dreams
+const dreams = [
+  "Find and count some sheep",
+  "Climb a really tall mountain",
+  "Wash the dishes"
+];
+
+// define variables that reference elements on our page
+const dreamsList = document.getElementById("dreams");
+const dreamsForm = document.forms[0];
+const dreamInput = dreamsForm.elements["dream"];
+
+// a helper function that creates a list item for a given dream
+const appendNewDream = function(dream) {
+  const newListItem = document.createElement("li");
+  newListItem.innerHTML = dream;
+  dreamsList.appendChild(newListItem);
+};
+
+// iterate through every dream and add it to our page
+dreams.forEach(function(dream) {
+  appendNewDream(dream);
+});
+
+// listen for the form to be submitted and add a new dream when it is
+dreamsForm.onsubmit = function(event) {
+  // stop our form submission from refreshing the page
+  event.preventDefault();
+
+  // get dream value and add it to the list
+  dreams.push(dreamInput.value);
+  appendNewDream(dreamInput.value);
+
+  // reset form
+  dreamInput.value = "";
+  dreamInput.focus();
+};
+
+/* styles */
+/* called by your view template */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+  margin: 2em;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+p {
+  max-width: 600px;
+}
+
+form {
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: cyan;
+  display: inline-block;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 3px;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+button {
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  box-shadow: 2px 2px teal;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: yellow;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid lightgrey;
+}
